@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  pocketbase:
+    build:
+      context: .
+      args:
+        POCKETBASE_VERSION: ${POCKETBASE_VERSION}
+    ports:
+      - "${PORT}:8090"
+    container_name: "pocketbase"
+    volumes:
+      - ./pb_data:/app/pb_data # Mappa i dati di PocketBase
+      - ./pb_migrations:/app/pb_migrations # Mappa le migrazioni di PocketBase
+      - ./pb_hooks:/app/pb_hooks # Mappa la cartella degli hook, se necessario
+volumes:
+  pb_data:
+    driver: local
+  pb_migrations:
+    driver: local
+  pb_hooks:
+    driver: local
